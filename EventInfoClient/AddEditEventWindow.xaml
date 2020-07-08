@@ -1,0 +1,45 @@
+﻿<Window x:Class="EventInfoClient.AddEditEventWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:EventInfoClient"
+        mc:Ignorable="d"
+        Title="Nowe wydarzenie" Height="300" Width="500"
+        x:Name="_this">
+    <Window.Resources>
+        
+    </Window.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Label VerticalAlignment="Center">Nazwa</Label>
+        <TextBox x:Name="NameTextBox" Grid.Column="1" Margin="5" Text="{Binding EventName, ElementName=_this}"></TextBox>
+        <Label Grid.Row="1" VerticalAlignment="Center">Typ wydarzenia</Label>
+        <ComboBox x:Name="TypeListBox" Grid.Row="1" Grid.Column="1" Margin="5" ItemsSource="{Binding Source={StaticResource EventTypeValues}}" 
+                  SelectedItem="{Binding Type,  ElementName=_this}">
+            <ComboBox.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding Converter={StaticResource EventTypeConverter}}"></TextBlock>
+                </DataTemplate>
+            </ComboBox.ItemTemplate>
+        </ComboBox>
+        <Label VerticalAlignment="Center" Grid.Row="2">Data</Label>
+        <DatePicker x:Name="EventDatePicker" Grid.Row="2" Grid.Column="1" Margin="5" SelectedDate="{Binding Date, ElementName=_this}"></DatePicker>
+        <Label Grid.Row="3" VerticalAlignment="Center">Opis</Label>
+        <TextBox x:Name="DescriptionTextBox" Grid.Row="3" Grid.Column="1" Margin="5" Text="{Binding Description, ElementName=_this}" TextWrapping="Wrap" AcceptsReturn="True"></TextBox>
+        <StackPanel Grid.Row="4" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right">
+            <Button x:Name="AddEditButton" Margin="5" Click="Button_Click">Dodaj wydarzenie</Button>
+            <Button Margin="5" IsCancel="True">Anuluj</Button>
+        </StackPanel>
+    </Grid>
+</Window>
